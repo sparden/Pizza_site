@@ -1,0 +1,93 @@
+ {% extends 'pizza/base.html' %}
+ {% block 'body' %}
+     {% load widget_tweaks %}
+      
+	  
+	 <div class="container">
+	  
+	 <h1>Order Pizza</h1>
+     <h2>{{note}}</h2>
+	 {% if created_pizza_pk %}
+	 <a href="{% url 'edit_order' created_pizza_pk %}">Edit Your Order</a>
+	{% endif %}
+	
+	 <form action="{% url 'order'%}" method="post" >
+     {% csrf_token %}
+	 {% for field in pizzaform %}
+	 <div class="form-group">
+	 {{field.errors}}
+	 {{field.label_tag}}
+	 {% render_field field class="form-control" %}
+	 </div>
+	 {% endfor %}
+	 	 <input type="submit" value="Order Pizza">
+     </form>
+
+     <br><br>
+
+     want more than one pizzas?
+
+     <form action="{% url 'pizzas' %}" method="get">
+         {{multiple_form}}
+	     <input type="submit" value="Get Pizzas">
+     </form>
+
+    </div>
+{% endblock %}
+
+<!--<h1>Welcome to Order Template</h1>
+<h2>{{note}}</h2>
+{% if created_pizza_pk %}
+<a href="{% url 'edit_order' created_pizza_pk %}">Edit Your Order</a>
+{% endif %}-->
+<!-- form action is use to send data of form to the specified url if not used then by default it send it current url post method will not show data in url but get will-->
+<!--<form enctype=multipart/form-data action="{% url 'order'%}" method="post" novalidate>// this can include any type of file to be accessed // we can also use novalidate attribute so that it does not required any validation--> 
+<!--<form action="{% url 'order'%}" method="post" >
+     {% csrf_token %}
+	 {{ pizzaform }}-->
+	 <!--taking form input as paragraph 
+	 {{ pizzaform.as_p }}
+	// taking form input as table 
+	 <table>
+	 {{ pizzaform.as_table }}
+	 </table>
+	 // taking form input as unordered list or ordered list
+	 <ul>
+	 {{ pizzaform.as_ul }}
+	 </ul>
+	 // pizzaform by field by field
+	 {{ pizzaform.topping1.errors }} //for errors that occured will be shown on screen
+	 {{ pizzaform.topping1.label_tag }}
+	 {{ pizzaform.topping1 }}
+	 
+	 {{ pizzaform.topping2.errors }} //for errors that occured will be shown on screen
+	 {{ pizzaform.topping2.label_tag }}
+	 {{ pizzaform.topping2 }}
+	 
+	 <label for="{{ pizzaform.size.id_for_label }}">Size:</label>
+	 {{ pizzaform.size.errors }} //for errors that occured will be shown on screen
+	 {{ pizzaform.size }}
+	 -->
+<!--	 <input type="submit" value="Order Pizza">
+</form>
+
+<br><br>
+
+want more than one pizzas?
+
+<form action="{% url 'pizzas' %}" method="get">
+     {{multiple_form}}
+	 <input type="submit" value="Get Pizzas">
+</form>-->
+
+
+<!-- <label for="topping1">Topping 1:</label>
+     <input type="text" id="topping1" name="topping1">
+	 <label for="topping2">Topping 2:</label>
+     <input type="text" id="topping2" name="topping2">
+	 <label for="size">Size :</label>
+     <select id="size" name="size">
+	     <option value="Small">Small</option>
+		 <option value="Medium">Medium</option>
+		 <option value="Large">Large</option>
+	 </select>-->

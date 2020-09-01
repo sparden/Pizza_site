@@ -1,0 +1,23 @@
+<h1>Order a Pizza</h1>
+
+<h2>{{ note }}</h2>
+{% if created_pizza_pk %}
+<a href="{% url 'edit_order' created_pizza_pk %}">Edit Your Order</a>
+{% endif %}
+
+
+<form action="{% url 'order' %}" method="post">
+    {% csrf_token %}
+    {{ pizzaform }}
+    <input type="submit" value="Order Pizza">
+</form>
+
+<br><br>
+
+Want more than one pizza?
+
+<form action="{% url 'pizzas' %}" method="get">
+  {% csrf_token %}
+  {{ multiple_form }}
+  <input type="submit" value="Get Pizzas">
+</form>
